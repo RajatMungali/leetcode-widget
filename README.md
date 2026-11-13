@@ -2,6 +2,9 @@
 
 A transparent glass desktop widget (Tauri + React) that shows your live LeetCode stats on your wallpaper.
 
+## Download
+Grab the latest installer from the [Releases page](https://github.com/RajatMungali/leetcode-widget/releases/latest). Windows may show a SmartScreen warning because the app is not code-signed: click More info, then Run anyway.
+
 ## Install
 Run `src-tauri\target\release\bundle\nsis\LeetCode Widget_1.0.0_x64-setup.exe`
 (or the `.msi` in the `msi` folder). Windows 10/11, no admin needed.
