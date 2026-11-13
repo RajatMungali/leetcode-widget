@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  background: transparent !important;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  color: #f4f4f8;
+}
+
+:root {
+  --card-a: 0.28;
+  --glass-img: none;
+  --wx: 0;
+  --wy: 0;
+  --mw: 1920;
+  --mh: 1080;
+}
+
+/* Fixed design canvas (matches the reference screenshot), scaled to the window */
+.stage {
+  width: 1057px;
+  height: 509px;
+  transform-origin: top left;
+  position: relative;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* Glass card: blurred wallpaper (aligned to screen) + frosted tint + light border */
+.card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.38);
+}
+.glass-img {
+  position: absolute;
+  z-index: -1;
+  left: calc((var(--wx) + var(--ox)) * -1px);
+  top: calc((var(--wy) + var(--oy)) * -1px);
+  width: calc(var(--mw) * 1px);
+  height: calc(var(--mh) * 1px);
+  background-image: var(--glass-img);
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+.glass-tint {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04) 55%),
+    rgba(14, 16, 26, var(--card-a));
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.cell {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  transition: filter 0.15s;
+}
+.cell:hover {
+  filter: brightness(1.35);
+}
+.l0 { background: rgba(255, 255, 255, 0.16); }
+.l1 { background: #0e6b32; }
+.l2 { background: #1a9a4a; }
+.l3 { background: #3ccf70; }
+.l4 { background: #8ff0ab; }
+
+.ctl {
+  opacity: 0.45;
+  transition: opacity 0.2s;
+}
+.stage:hover .ctl {
+  opacity: 1;
+}
+
+input[type="range"] {
+  accent-color: #ffa116;
+}
+select,
+input[type="text"] {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #f4f4f8;
+  padding: 5px 9px;
+  outline: none;
+  user-select: text;
+}
+input[type="text"]:focus {
+  border-color: #ffa116;
+}
+select option {
+  background: #2b2b2b;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spin { animation: spin 0.9s linear infinite; }
+@keyframes pulse2 {
+  50% { opacity: 0.45; }
+}
+.skeleton { animation: pulse2 1.4s ease-in-out infinite; }
+
+/* slim, see-through scrollbars */
+.sbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.sbar::-webkit-scrollbar-track { background: transparent; }
+.sbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.22); border-radius: 3px; }
+.sbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+::-webkit-scrollbar { width: 6px; height: 6px; background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.22); border-radius: 3px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }

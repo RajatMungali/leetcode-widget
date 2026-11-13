@@ -1,0 +1,28 @@
+[package]
+name = "leetcode-widget"
+version = "1.0.0"
+description = "Transparent floating LeetCode stats widget"
+edition = "2021"
+
+[lib]
+name = "leetcode_widget_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-autostart = "2"
+tauri-plugin-single-instance = "2"
+tauri-plugin-window-state = "2"
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+tokio = { version = "1", features = ["sync"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
